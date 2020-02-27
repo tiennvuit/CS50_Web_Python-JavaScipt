@@ -1,0 +1,32 @@
+{% extends "home.html" %}
+
+{% block title %}
+  Registration
+{% endblock %}
+
+{% block heading %}
+  <h1 href="{{ url_for('index') }}">Review books</h1>
+  <div id="navigation"; class="topnav">
+    <a class="active" href="{{ url_for('index') }}">Home</a>
+    <a id="#login" href="{{ url_for('login') }}">Login</a>
+{% endblock %}
+
+{% block body %}
+  <div>
+    <h2>Let register your account by filling in the below form !</h2>
+    <p><strong>{{ password_error }}</strong></p>
+    <form  action="{{ url_for('register') }}" method="post">
+      <label for="email"><b>Email</b></label>
+      <p><input type="email" name="email" value="" placeholder="tien@gmail.com"></p>
+      <label for="fullname"><b>Your fullname</b></label>
+      <p><input type="text" name="fullname" value="" placeholder="Nguyen Van Tien"></p>
+      <label for="username"><b>Username</b></label>
+      <p><input type="text" name="username" value="" placeholder="tiennvuit"></p>
+      <label for="password"><b>Password</b></label>
+      <p><input type="password" name="password" value=""></p>
+      <label for="repassword"><b>Re-enter password</b></label>
+      <p><input type="password" name="repassword" value=""></p>
+      <button type="submit" name="register">Register</button>
+    </form>
+  <div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'home.html' %}
+
+{% block title %}
+  Can't give the reivew !
+{% endblock %}
+
+
+{% block body %}
+  <p>You haven't login into your account !</p>
+  <p><a style="text-decoration:none; " href="{{ url_for('login') }}">Go to login...</a></p>
+{% endblock %}

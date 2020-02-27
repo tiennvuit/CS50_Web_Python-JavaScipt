@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      {% block title %}
+        Home
+      {% endblock %}
+    </title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      td {
+        text-align: left;
+        padding: 8px;
+      }
+
+      tr:nth-child(even){background-color: #f2f2f2}
+
+      th {
+        background-color: #4CAF50;
+        color: white;
+        text-align: center;
+      }
+
+      caption {
+        margin: 20px;
+        font-size: 30px;
+      }
+
+      a {
+        text-color: blue;
+        text-decoration: none;
+      }
+
+      checked {
+          color: blue;
+      }
+    </style>
+    <heading>
+      {% block heading %}
+        <h1 href="{{ url_for('index') }}">Review books</h1>
+        <div id="navigation"; class="topnav">
+          <a class="active" href="{{ url_for('index') }}">Home</a>
+          {% if session["username"] %}
+            <a id="#logout" href="{{ url_for('logout') }}">Logout</a>
+            <a id="#user" href="{{ url_for('user') }}">Account</a>
+          {% else %}
+              <a id="#login"; href="{{ url_for('login') }}">Login</a>
+              <a id="#register"; href="{{ url_for('register') }}">Register</a>
+          {% endif %}
+        </div>
+        <div style="padding-top:12px; padding:-bottom: 12px">
+          <form action="{{ url_for('search') }}" method="post">
+            <p><b>Type the isbn code of book you want search.</b></p>
+            <div class="form-group">
+              <input type="text" name="isbn" placeholder="1857231082">
+              <button class="btn btn-primary">Search</button>
+            </div>
+            {% if message_search %}
+              <p>{{ message_search }}</p>
+            {% endif %}
+          </form>
+        </div>
+      {% endblock %}
+    </heading>
+  </head>
+  <body>
+    {% block body %}
+        <table style="width:80%" align="center">
+            <caption>Top 10 best rating books</caption>
+            <tr>
+              <th><b>ISBN</b></th>
+              <th><b>Title</b></th>
+              <th><b>Author</b></th>
+              <th><b>Year</b></th>
+              <th><b>Review count</b></th>
+              <th><b>Average score</b></th>
+            </tr>
+            {% for book in books %}
+              <tr>
+                <td style="text-align: center;"> {{ book.isbn }} </td>
+                <td> {{ book.title }} </td>
+                <td> {{ book.author }} </td>
+                <td style="text-align: center"> {{ book.year }} </td>
+                <td style="text-align: center"> {{ book.review_count }} </td>
+                <td style="text-align: center"> {{ book.average_score }} </td>
+              </tr>
+            {% endfor %}
+          </table>
+    {% endblock %}
+  </body>
+</html>

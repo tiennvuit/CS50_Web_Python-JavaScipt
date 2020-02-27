@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Hello Page and more..</title>
+  </head>
+  <body>
+    <ul>
+      {% for name in names %}
+        <li>Hello {{ name }}</li>
+      {% endfor %}
+    </ul>
+
+    <form action="{{ url_for('hello1') }}" method="post">
+      <input type="text" name="name" placeholder="Enter the name...">
+    </form>
+  </body>
+</html>
