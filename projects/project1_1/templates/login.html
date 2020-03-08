@@ -1,0 +1,26 @@
+{% extends 'home.html' %}
+
+{% block title %}
+  Login
+{% endblock %}
+
+{% block heading %}
+  <h1 href="{{ url_for('index') }}">Review books</h1>
+  <div id="navigation"; class="topnav">
+    <a class="active" href="{{ url_for('index') }}">Home</a>
+    <a id="#login"; href="{{ url_for('login') }}">Login</a>
+    <a id="#register"; href="{{ url_for('register') }}">Register</a>
+  </div>
+{% endblock %}
+{% block body %}
+  <div>
+    <p><b> {{ message }} </b></p>
+    <form action="{{ url_for('login') }}" method="post">
+      <label for="username">Username</label><br>
+      <input style="" type="text" name="username" placeholder="tiennvuit"><br>
+      <label for="password">Password</label><br>
+      <input style="" type="password" name="password" value=""><br>
+      <button type="submit" name="login">Login</button>
+    </form>
+  </div>
+{% endblock %}

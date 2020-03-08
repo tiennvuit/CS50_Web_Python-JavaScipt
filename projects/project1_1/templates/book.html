@@ -1,0 +1,74 @@
+{% extends "home.html" %}
+
+{% block title %}
+  {{ book.title.capitalize() }}
+{% endblock %}
+
+{% block body %}
+  {% if message: %}
+    <p>{{ message }}</p>
+  {% endif %}
+
+  <div style="padding: 10px; align: center">
+  {% block content %}
+    <p><b>ISBN: </b> {{ book["isbn"] }} </p>
+    <p><b>Title: </b> {{ book["title"] }}</p>
+    <p><b>Author: </b> {{ book["author"] }}</p>
+    <p><b>Year: </b> {{ book["year"] }}<p>
+    <p><b>Review count: </b>{{ book["review_count"] }}</p>
+    <p><b>Average score: </b>{{ book["average_score"] }}</p>
+  {% endblock %}
+
+  {% block rating %}
+    {% if rating_info %}
+    <table style="width:80%" align="center">
+        <caption>The ratings of users</caption>
+        <tr>
+          <th><b>Username</b></th>
+          <th><b>Star</b></th>
+          <th><b>Opinion</b></th>
+          <th><b>Rating day</b></th>
+        </tr>
+        {% for row in rating_info %}
+          {{ row }}
+          <tr>
+            <td style="text-align: center;"> {{ row.username }} </td>
+            <td style="text-align: center"> {{ row.star }} </td>
+            <td style="text-align: left"> {{ row.opinion }} </td>
+            <td style="text-align: center"> {{ row.rating_day }} </td>
+          </tr>
+        {% endfor %}
+      </table>
+    {% else %}
+      <p>There wasn't ratings about this book. !</p>
+    {% endif %}
+  {% endblock %}
+
+  {% block commend %}
+  </div>
+
+  <div style="padding: 12px">
+    {% if commend_success %}
+      <p><i>{{ commend_success }}</i></p>
+    {% endif %}
+    <form action="{{ url_for('commend', book_id=book.id) }}" method="post">
+      <p>Let rating for this book</p>
+        <div class="star">
+          <input type="radio" id="star5" name="star" value="5" />
+          <label for="star5" title="text">5 stars</label>
+          <input type="radio" id="star4" name="star" value="4" />
+          <label for="star4" title="text">4 stars</label>
+          <input type="radio" id="star3" name="star" value="3" />
+          <label for="star3" title="text">3 stars</label>
+          <input type="radio" id="star2" name="star" value="2" />
+          <label for="star2" title="text">2 stars</label>
+          <input type="radio" id="star1" name="star" value="1" />
+          <label for="star1" title="text">1 star</label>
+        </div>
+      <p>Let write some review for this book</p>
+      <input name="opinion" placeholder="Enter your commend about this book !">
+      <button type="submit" name="submit">Review</button>
+    </form>
+  </div>
+  {% endblock %}
+{% endblock %}

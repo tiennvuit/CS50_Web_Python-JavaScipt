@@ -1,0 +1,36 @@
+{% extends 'home.html' %}
+
+{% block title %}
+  {{ session["userr"]["username"].capitalize() }}
+{% endblock %}
+
+{% block heading %}
+  <h1 href="{{ url_for('index') }}">Review books</h1>
+  <div id="navigation"; class="topnav">
+    <a class="active" href="{{ url_for('index') }}">Home</a>
+    <a id="logout"; href="{{ url_for('logout') }}">Logout</a>
+    <a id="drashboard"; href="{{ url_for('drashboard') }}">Drashboard</a>
+  </div>
+  <div style="padding-top:12px; padding:-bottom: 12px">
+    <form action="{{ url_for('search') }}" method="post">
+      <p><b>Type the isbn code of book you want search.</b></p>
+      <div class="form-group">
+        <input type="text" name="isbn">
+        <button class="btn btn-primary">Search</button>
+      </div>
+      {% if message_search %}
+        <p>{{ message_search }}</p>
+      {% endif %}
+    </form>
+  </div>
+{% endblock %}
+
+{% block body %}
+  <p>Information about your account</p>
+  <ul>
+    <li>Your username: {{ session["userr"]["username"] }}</li>
+    <li>Your password: {{ session["userr"]["password"] }}</li>
+    <li>Your email: {{ session["userr"]["email"] }}</li>
+    <li>Register day: {{ session["userr"]["day_register"] }} </li>
+  </ul>
+{% endblock %}
